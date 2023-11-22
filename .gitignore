@@ -1,0 +1,17 @@
+node_modules
+
+
+# Ignore compiled files
+#*.o
+#*.out
+
+# Ignore log files
+#*.log
+
+# Ignore temporary files and directories
+#tmp/
+#temp/
+
+# Ignore specific files
+#config.ini
+#secrets.txt
