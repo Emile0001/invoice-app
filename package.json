@@ -1,0 +1,14 @@
+{
+  "name": "invoice-app",
+  "version": "1.0.0",
+  "description": "Javascript, nodejs and expressjs invoice app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Emile Botes",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
