@@ -33,8 +33,8 @@
 const express = require("express");
 const app = express();
 const fs = require("fs"); //file system package
-const path = require("path"); //construct complete paths compatiable on on OS
-const { stringify } = require("querystring");
+const path = require("path"); //construct complete paths compatable on on OS
+const port = 3000;
 
 app.use(express.urlencoded({ extended: false }));
 
@@ -46,6 +46,26 @@ app.get("/", (req, res) => {
     res.send(
         '<form action="/store-user" method="POST"><label>Name: </label><input type="text" name="username"><button>Submit</button></form>'
     );
+});
+
+//display stored user names
+app.get("/users", (req, res) => {
+    const filePath = path.join(__dirname, "data", "users.json"); //find the path
+    const fileData = fs.readFileSync(filePath); //read the data
+    const existingUsers = JSON.parse(fileData); //parse the data
+
+    // // Create an array to store list items
+    const listItems = existingUsers.map((user) => `<li>${user}</li>`);
+    // // Send HTML with the list
+    res.send(`<ol>${listItems.join("")}</ol>`);
+
+    //other way of displaying the users in a list
+    // let responseData = "<ul>";
+    // for (const user of existingUsers) {
+    //     responseData += "<li>" + user + "</li>";
+    // }
+    // responseData += "</ul>";
+    // res.send(responseData);
 });
 
 app.post("/store-user", (req, res) => {
@@ -62,6 +82,6 @@ app.post("/store-user", (req, res) => {
     res.send("<h1>Username stored!</h1>");
 });
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000.");
+app.listen(port, () => {
+    console.log("Server is running on port " + port + ".");
 });
