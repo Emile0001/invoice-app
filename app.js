@@ -33,13 +33,24 @@
 const express = require("express");
 
 const app = express();
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/currenttime", (req, res) => {
     res.send("<h1>" + new Date().toISOString() + "</h1>");
 });
 
 app.get("/", (req, res) => {
-    res.send("<h1>Hello World</h1>");
+    res.send(
+        '<form action="/store-user" method="POST"><label>Name: </label><input type="text" name="username"><button>Submit</button></form>'
+    );
 });
 
-app.listen(3000);
+app.post("/store-user", (req, res) => {
+    const userName = req.body.username;
+    console.log(userName);
+    res.send("<h1>Username stored!</h1>");
+});
+
+app.listen(3000, () => {
+    console.log("Server is running on port 3000.");
+});
