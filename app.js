@@ -31,8 +31,11 @@
 // Express method
 
 const express = require("express");
-
 const app = express();
+const fs = require("fs"); //file system package
+const path = require("path"); //construct complete paths compatiable on on OS
+const { stringify } = require("querystring");
+
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/currenttime", (req, res) => {
@@ -48,6 +51,14 @@ app.get("/", (req, res) => {
 app.post("/store-user", (req, res) => {
     const userName = req.body.username;
     console.log(userName);
+
+    const filePath = path.join(__dirname, "data", "users.json");
+    const fileData = fs.readFileSync(filePath);
+    const existingUsers = JSON.parse(fileData);
+    existingUsers.push(userName);
+
+    fs.writeFileSync(filePath, JSON.stringify(existingUsers));
+
     res.send("<h1>Username stored!</h1>");
 });
 
