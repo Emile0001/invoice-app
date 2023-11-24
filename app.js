@@ -44,7 +44,7 @@ app.get("/currenttime", (req, res) => {
 
 app.get("/", (req, res) => {
     res.send(
-        '<form action="/store-user" method="POST"><label>Name: </label><input type="text" name="username"><button>Submit</button></form>'
+        '<form action="/store-user" method="POST"><label>Enter Name: </label><input type="text" name="username"><button>Submit</button></form>'
     );
 });
 
