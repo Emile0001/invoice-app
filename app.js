@@ -36,7 +36,7 @@ const fs = require("fs"); //file system package
 const path = require("path"); //construct complete paths compatable on on OS
 const port = 3000;
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false })); //middleware
 
 app.get("/currenttime", (req, res) => {
     res.send("<h1>" + new Date().toISOString() + "</h1>");
